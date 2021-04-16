@@ -1,0 +1,28 @@
+# от 2 до 36ричной СС
+def Writing(s, base1, base2):
+    if s == 0:
+        return
+    Writing(s // base2, base1, base2)
+    if 10 <= (s % base2) <= 35:
+        print(chr(s % base2 + 55), end="")
+    else:
+        print(s % base2, end="")
+def nums(n,base1,base2):
+    n=n.upper()
+    n=n.replace(" ","")
+    while True:
+        if n[0]=="0":
+            n=n[1:]
+        else:
+            break
+    s=0 #введённое n в Base 10
+    for i in range(len(n)):
+        if n[len(n)-1-i].isalpha():
+            s+=(ord(n[len(n)-1-i])-55)* (base1 ** i)
+        else:
+            s += (int(n[len(n)-1-i])) * (base1 ** i)
+    print("Base 10: ",s)
+    print("Base we need: ",end="")
+    Writing(s,base1,base2)
+nums(input("Введите число: "),int(input("Base вашего числа: ")),int(input("Необходимая Base: ")))
+
