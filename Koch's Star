@@ -1,0 +1,32 @@
+import turtle
+p = turtle.Turtle()
+p.ht()
+p.speed(0)
+p.width(0)
+
+def Creator(n,PiecePast):
+    if n<=0:
+        return PiecePast
+
+    PieceFuture=PiecePast+"\np.right(-60)\n"+PiecePast+"\np.right(120)\n"+PiecePast+"\np.right(-60)\n"+PiecePast
+    return Creator(n-1,PieceFuture)
+
+def Star(n,length):
+    p.up()
+    p.goto(-length / 2, (length / 3)*0.86)
+    p.down()
+    length=(length/3**(n-1))/3
+    Piece = f"""p.forward({length})"""
+    Piece=Creator(n,Piece)
+
+    for i in range(3):
+
+        for Command in Piece.split():
+            eval(Command)
+        p.right(120)
+
+length=1140 # Размер одной стороны
+deep=5    # Подробность прорисовки
+Star(deep,length)
+
+turtle.done()
