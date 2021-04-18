@@ -1,32 +1,33 @@
 import turtle
+from math import sin
 p = turtle.Turtle()
 p.ht()
 p.speed(0)
 p.width(0)
 
-def Creator(n,PiecePast):
+def Creator(n,PiecePast,angle):
     if n<=0:
         return PiecePast
+    PieceFuture=PiecePast+f"\np.right({-angle})\n"+PiecePast+f"\np.right({2*angle})\n"+PiecePast+f"\np.right({-angle})\n"+PiecePast
+    return Creator(n-1,PieceFuture,angle)
 
-    PieceFuture=PiecePast+"\np.right(-60)\n"+PiecePast+"\np.right(120)\n"+PiecePast+"\np.right(-60)\n"+PiecePast
-    return Creator(n-1,PieceFuture)
-
-def Star(n,length):
+def Star(n,length,vertices):
+    angle=360/vertices
+    print(angle)
     p.up()
-    p.goto(-length / 2, (length / 3)*0.86)
+    p.goto(-length / 4, (length / vertices)*sin(angle*3.1416/180))
     p.down()
-    length=(length/3**(n-1))/3
+    length=(length/3**(n-1))/vertices
     Piece = f"""p.forward({length})"""
-    Piece=Creator(n,Piece)
-
-    for i in range(3):
-
+    Piece=Creator(n,Piece,angle)
+    for i in range(vertices//2+1):
         for Command in Piece.split():
             eval(Command)
-        p.right(120)
+        p.right(2*angle)
 
-length=1140 # Размер одной стороны
-deep=5    # Подробность прорисовки
-Star(deep,length)
+length=10000 # Размер одной стороны
+deep=5       # Подробность прорисовки
+Vertices=5   # Количество вершин n-угольной звезды  
+Star(deep,length,Vertices)
 
 turtle.done()
