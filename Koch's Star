@@ -25,7 +25,7 @@ def Star(n,length,vertices):
             eval(Command)
         p.right(2*angle)
 
-length=10000 # Размер одной стороны
+length=1000  # Размер одной стороны
 deep=5       # Подробность прорисовки
 Vertices=5   # Количество вершин n-угольной звезды  
 Star(deep,length,Vertices)
