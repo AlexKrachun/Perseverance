@@ -1,28 +1,36 @@
-# от 2 до 36ричной СС
-def Writing(s, base1, base2):
-    if s == 0:
-        return
-    Writing(s // base2, base1, base2)
-    if 10 <= (s % base2) <= 35:
-        print(chr(s % base2 + 55), end="")
-    else:
-        print(s % base2, end="")
-def nums(n,base1,base2):
-    n=n.upper()
-    n=n.replace(" ","")
-    while True:
-        if n[0]=="0":
-            n=n[1:]
-        else:
-            break
-    s=0 #введённое n в Base 10
-    for i in range(len(n)):
-        if n[len(n)-1-i].isalpha():
-            s+=(ord(n[len(n)-1-i])-55)* (base1 ** i)
-        else:
-            s += (int(n[len(n)-1-i])) * (base1 ** i)
-    print("Base 10: ",s)
-    print("Base we need: ",end="")
-    Writing(s,base1,base2)
-nums(input("Введите число: "),int(input("Base вашего числа: ")),int(input("Необходимая Base: ")))
+base_1 = int(input())
+n = input()
+base_2 = int(input())
 
+
+def to_base_10(s: str, b1: int = 1, res: int = 0) -> int:
+    if s == '':
+        return res
+    mediate: str = s[len(s)-1]
+
+    if '0' <= mediate <= '9':
+        res += int(mediate) * b1
+    else:
+        res += (ord(mediate)-55) * b1
+
+    return to_base_10(s[:-1], b1*base_1, res)
+
+
+def from_base_10(num: int, res: str = '') -> str:
+    if num == 0:
+        return res[::-1]
+    mediate: int = num % base_2
+    if 0 <= mediate <= 9:
+        res += str(mediate)
+    else:
+        res += chr(mediate + 55)
+    return from_base_10(num // base_2, res)
+
+
+def main(s):
+    num: int = to_base_10(s)
+    result: str = from_base_10(num)
+    print(result)
+
+
+main(n)
