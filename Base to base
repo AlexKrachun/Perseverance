@@ -27,7 +27,7 @@ def from_base_10(num: int, res: str = '') -> str:
     return from_base_10(num // base_2, res)
 
 
-def main(s):
+def main(s) -> None:
     num: int = to_base_10(s)
     result: str = from_base_10(num)
     print(result)
