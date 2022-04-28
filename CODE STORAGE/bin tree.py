@@ -44,11 +44,11 @@ class Tree:
                 return
 
     def Get_hight(self):
-        if not self.left is None and not self.right is None:
+        if self.left and self.right:
             return 1 + max(self.left.Get_hight(), self.right.Get_hight())
-        elif not self.left is None:
+        elif self.left:
             return 1 + self.left.Get_hight()
-        elif not self.right is None:
+        elif self.right:
             return 1 + self.right.Get_hight()
         else:
             return 1
@@ -81,6 +81,17 @@ class Tree:
             self = self.right
         print(self.value)
 
+    def Count_elements(self):
+        if self.left and self.right:
+            return 1 + self.left.Count_elements() + self.right.Count_elements()
+        elif self.left:
+            return 1 + self.left.Count_elements()
+        elif self.right:
+            return 1 + self.right.Count_elements()
+        else:
+            return 1
+
+
 
 a = [6, 8, 3, 6, 8, -99, 3, -12]
 t = Tree(a[0])
@@ -98,3 +109,4 @@ t.Print_post()
 t.Max()
 t.Min()
 print(t.Get_hight())
+print(t.Count_elements())
