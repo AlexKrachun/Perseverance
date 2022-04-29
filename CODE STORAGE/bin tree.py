@@ -81,6 +81,22 @@ class Tree:
             self = self.right
         print(self.value)
 
+    def Sec_max(self):
+        if self.right:
+            while self.right.right:
+                self = self.right
+            if self.right.left:
+                self = self.right.left
+                while self.right:
+                    self = self.right
+
+            print(self.value)
+        else:
+            self = self.left
+            while self.right:
+                self = self.right
+            print(self.value)
+
     def Count_elements(self):
         if self.left and self.right:
             return 1 + self.left.Count_elements() + self.right.Count_elements()
@@ -91,22 +107,26 @@ class Tree:
         else:
             return 1
 
+    def All_leaves(self):
+        if self.left and self.right:
+            return self.left.All_leaves() + self.right.All_leaves()
+        elif self.left:
+            return self.left.All_leaves()
+        elif self.right:
+            return self.right.All_leaves()
+        else:
+            return f'{self.value}\n'
+
+    def Is_ballansed(self):
+        if self.left and self.right:
+            is_true = abs(self.left.Get_hight() - self.right.Get_hight()) <= 1
+            is_true = is_true and self.left.Is_ballansed() and self.right.Is_ballansed()
+        elif self.left:
+            is_true = self.left.Get_hight() <= 1
+        elif self.right:
+            is_true = self.right.Get_hight() <= 1
+        else:
+            is_true = True
+        return is_true
 
 
-a = [6, 8, 3, 6, 8, -99, 3, -12]
-t = Tree(a[0])
-for i in a[1:]:
-    t.Add(i)
-
-for i in a + [1, -1, 6, 4, 3, 5, 0]:
-    t.In_tree(i)
-t.Print_in()
-print()
-t.Print_pre()
-print()
-t.Print_post()
-
-t.Max()
-t.Min()
-print(t.Get_hight())
-print(t.Count_elements())
