@@ -1,22 +1,28 @@
 import turtle, math
-hr=turtle.Turtle()
+
+turtle.tracer(0)
+hr = turtle.Turtle()
 hr.speed(0)
 hr.ht()
 hr.width(0)
 hr.up()
-hr.goto(0,-600)
+hr.goto(0, -500)
 hr.down()
 hr.left(90)
-def tree(i):
-    if i<=1.5:
+
+
+def tree(i, angle):
+    if i <= 2:
         return
     else:
         hr.forward(i)
-        hr.left(45)
-        tree(i/math.sqrt(2))
-        hr.right(90)
-        tree(i/math.sqrt(2))
-        hr.left(45)
+        hr.left(angle)
+        tree(i / math.sqrt(2), angle)
+        hr.right(angle * 2)
+        tree(i / math.sqrt(2), angle)
+        hr.left(angle)
         hr.backward(i)
-tree(400)
+
+tree(300, 45)
+turtle.update()
 turtle.done()

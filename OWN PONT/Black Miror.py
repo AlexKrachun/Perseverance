@@ -7,7 +7,7 @@ p.width(4)
 p.ht()
 
 DirectionVecLength = 10000
-TeakLength = 100
+TeakLength = 10
 
 
 def PrintLine(Line):  ####
@@ -184,7 +184,7 @@ def RefEnd(Obj, ListLines):
 
 def Printer(n):
     # Создаем массив линий
-    xRect, yRect = 800, 500  # Координаты вершины прямоуголбника
+    xRect, yRect = 600, 300  # Координаты вершины прямоуголбника
 
     ListLines = [[[randint(-xRect, xRect), randint(-yRect, yRect)] for i in range(2)] for i in range(n)]
     ListLines.append([[xRect, yRect], [xRect, -yRect]])
@@ -207,8 +207,8 @@ def Fly(ObjNum):
 
 
 ThreadNum = 1  # Количество потоков
-ObjNum = 1  # Количество обьектов в одном потоке
-LineNum = 7  # Количество отрезков
+ObjNum = 20  # Количество обьектов в одном потоке
+LineNum = 10  # Количество отрезков
 
 ListLines = Printer(LineNum)
 ListThreads = []
